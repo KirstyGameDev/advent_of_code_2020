@@ -39,11 +39,47 @@ fn day_two()
             valid_password_count +=1;
         }
 
-        //println!("Password {:?} , needs char {}. Count {} ", potential_password, needed_char, char_count);
-
+        // Part Two
+        if get_valid_char_placement(min_occ, max_occ, needed_char.to_string(), potential_password)
+        {
+            valid_password_count +=1;
+        }
     }
 
     println!("Valid password count is {}", valid_password_count);
+}
+
+// TODO - tidy up this function from it's brute forced chaos!
+fn get_valid_char_placement(min : i32, max :i32, char : String , password : &str) -> bool
+{
+    let mut valid = true;
+    let mut valid_count = 0;
+    let mut start_byte : usize = min as usize;
+    start_byte -=1;
+
+    let mut finish_byte : usize = max as usize;
+    finish_byte -=1;
+
+    let first_char = password.chars().nth(start_byte).unwrap_or_default();
+    let second_char = password.chars().nth(finish_byte).unwrap_or_default();
+
+    if char.matches(first_char).count() == 1
+    {
+        valid_count +=1;
+    }
+    if char.matches(second_char).count() == 1
+    {
+        valid_count += 1;
+    }
+
+    println!("{:?}", valid_count);
+
+    if valid_count != 1
+    {
+        valid = false;
+    }
+
+    valid
 }
 
 fn get_valid_char_occurances(min : i32, max :i32, char : String , password : &str) -> bool
