@@ -1,9 +1,63 @@
 use std::fs;
+use std::num;
 
 fn main() {
 
-    day_one();
+//    day_one();
 
+    day_two();
+}
+
+
+fn day_two()
+{
+    println!("Starting day two");
+
+    let passwords = fs::read_to_string("input_files/input_02.txt").expect("Something went wrong reading the file.");
+    let password_lines = passwords.lines();
+    let mut valid_password_count = 0;
+
+    for line in password_lines
+    {
+        let split_string : Vec<&str> = line.split_whitespace().collect();
+
+        //println!("{:?}", split_string);
+        // Need to find the index of the '-' as we may have numbers that are double digits.
+
+        let dash_index : usize = split_string[0].find('-').expect("Unable to find '-' in split_string");
+
+        let min_occ : i32 = split_string[0][..dash_index].parse().expect("Unable to parse min from string to i32");
+        let max_occ : i32 = split_string[0][dash_index+1..].parse().expect("Unable to parse max from string to i32");
+
+        let needed_char = &split_string[1].to_string()[0..1];
+
+        let potential_password = &split_string[2];
+
+        //Part one
+        if get_valid_char_occurances(min_occ, max_occ, needed_char.to_string(), potential_password)
+        {
+            valid_password_count +=1;
+        }
+
+        //println!("Password {:?} , needs char {}. Count {} ", potential_password, needed_char, char_count);
+
+    }
+
+    println!("Valid password count is {}", valid_password_count);
+}
+
+fn get_valid_char_occurances(min : i32, max :i32, char : String , password : &str) -> bool
+{
+    let mut is_valid = false;
+
+    let char_count : usize = password.matches(&char).count();
+
+    if char_count >= min as usize && char_count <= max as usize
+    {
+        is_valid = true;
+    }
+
+    is_valid
 }
 
 fn get_input() -> Vec<i32>
