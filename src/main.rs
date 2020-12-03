@@ -1,11 +1,16 @@
 use std::fs;
 use std::num;
 
+mod day_three;
+
 fn main() {
 
 //    day_one();
 
-    day_two();
+//    day_two();
+
+day_three::day_three();
+
 }
 
 
