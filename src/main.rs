@@ -2,6 +2,7 @@ use std::fs;
 use std::num;
 
 mod day_three;
+mod day_four;
 
 fn main() {
 
@@ -9,7 +10,9 @@ fn main() {
 
 //    day_two();
 
-day_three::day_three();
+//day_three::day_three();
+
+day_four::day_four();
 
 }
 
