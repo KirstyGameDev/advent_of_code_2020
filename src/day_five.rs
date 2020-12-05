@@ -38,7 +38,6 @@ pub fn day_five()
             println!("Seat found {:?}", seats_occupied[i] + 1);
         }
     }
-    println!("Part two - seat count is {:?}", seats_occupied.len());
 }
 
 // Returns the seat ID to check
