@@ -3,6 +3,7 @@ use std::num;
 
 mod day_three;
 mod day_four;
+mod day_five;
 
 fn main() {
 
@@ -12,11 +13,12 @@ fn main() {
 
 //day_three::day_three();
 
-day_four::day_four();
+//day_four::day_four();
 
+day_five::day_five();
 }
 
-
+/*
 fn day_two()
 {
     println!("Starting day two");
@@ -213,4 +215,4 @@ fn multiply_numbers(x:i32 , y:i32) -> i32
 {
     println!("The found numbers for the solution are {}, {}", x , y);
     x * y
-}
+}*/
