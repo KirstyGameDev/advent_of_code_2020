@@ -4,6 +4,7 @@ use std::num;
 mod day_five;
 mod day_four;
 mod day_three;
+mod day_six;
 
 fn main() {
     //    day_one();
@@ -14,7 +15,9 @@ fn main() {
 
     //day_four::day_four();
 
-    day_five::day_five();
+    //day_five::day_five();
+
+    day_six::day_six();
 }
 
 /*
