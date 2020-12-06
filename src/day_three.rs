@@ -58,7 +58,7 @@ fn traverse_slope(path: &mut Lines, right: usize, down: usize) -> i32 {
             }
 
         */
- // Find out our max boundary (removes the assumption that all the input lines are the same length)
+        // Find out our max boundary (removes the assumption that all the input lines are the same length)
         let max_length = line.len();
 
         check_byte += right;
