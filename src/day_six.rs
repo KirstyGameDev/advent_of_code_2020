@@ -7,6 +7,17 @@ pub fn day_six() {
     let groups_answers = fs::read_to_string("input_files/input_06.txt")
         .expect("Something went wrong reading the file.");
 
+    let part_two = groups_answers
+          .split("\n\n")
+          .map(|group| group.chars().filter(|&c| c != '\n')
+              .unique()
+              .map(|answer| group.chars().filter(|&c| c == answer).count())
+              .filter(|&count| count == group.lines().count())
+              .count()
+          ).sum::<usize>()
+          .to_string()
+
+    println!(p)
     let answers = groups_answers.lines();
     let mut num_of_yes_per_group: Vec<usize> = Vec::new();
     let mut num_of_matching_yes: Vec<usize> = Vec::new();
