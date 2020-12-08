@@ -19,6 +19,7 @@ fn find_num_of_suitable_bags(rules : Vec<String>) -> usize
 {
     let mut bags_to_check : Vec<String> = Vec::new();
     bags_to_check.push("shiny gold".to_string());
+    let mut bags_checked : Vec<String> = Vec::new();
 
     let mut total : usize = 0;
 
@@ -26,20 +27,37 @@ fn find_num_of_suitable_bags(rules : Vec<String>) -> usize
     while bags_to_check.len() > 0
     {
         let current = bags_to_check.pop().expect("Unable to pop off the end");
-
         for rule in &rules
         {
-            // This is only getting the first part after contain
-            // TODO get the whole string after the contains.
-            let split = rule.split("contain").collect::<Vec<&str>>();
-
-            println!("{:?}", split[0]);
-
-            if split[0].contains(&current)
+            match rule.find(&current)
             {
-                total+=1;
+                Some(s) =>
+                {
+                    // Assuming here that if we're past the current bags string length, that it's not the first part
+                    // of the rule e.g. "Shiny Gold Bags contains ..."
+                    if s > current.len()
+                    {
+
+                        // We have a new bag to check in the rules so let's add it to the Vec
+                        let r : Vec<_> = rule.split_whitespace().collect();
+                        let mut new_bag = r[0].to_string();
+                        new_bag.push_str(" ");
+                        new_bag.push_str(&r[1].to_string());
+
+                        if new_bag != current && !bags_to_check.contains(&new_bag) && !bags_checked.contains(&new_bag)
+                        {
+                            bags_to_check.push(new_bag);
+
+                            total += 1;
+                        }
+
+                    }
+                }
+                None => {continue;}
             }
         }
+        // Now that we've checked over this bag, lets add this to the checked pile.
+        bags_checked.push(current);
     }
 
     total
