@@ -2,9 +2,12 @@ use std::fs;
 use std::num;
 
 mod day_seven;
+mod day_eight;
+
 fn main() {
 
-    day_seven::day_seven();
+//    day_seven::day_seven();
+    day_eight::run();
 }
 
 /*
