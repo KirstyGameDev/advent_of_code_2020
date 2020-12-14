@@ -1,13 +1,8 @@
-use std::fs;
-use std::num;
-
-mod day_seven;
-mod day_eight;
+mod day_four;
 
 fn main() {
 
-//    day_seven::day_seven();
-    day_eight::run();
+    day_four::day_four();
 }
 
 /*

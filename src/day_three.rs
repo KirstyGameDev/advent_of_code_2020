@@ -5,13 +5,13 @@ pub fn day_three() {
     println!("Starting day three");
 
     let map = fs::read_to_string("input_files/input_03.txt").expect("Something went wrong reading the file.");
-    let mut lines = map.lines();
+    let mut lines: Vec<_> = map.lines().collect();
     
     // Part One
     // Find out how many tree's we would encounter with the toboggan by going right 3, down 1, starting
     // from the top left and working our way down.
-    let mut lines_copy = lines.clone();
-    let part_one_answer: i64 = traverse_slope(&mut lines_copy, 3, 1);
+   // let mut lines_copy = lines.clone();
+    let part_one_answer: i64 = traverse_slope(&lines, 3, 1);
     println!("Part One - {:?}", part_one_answer);
 
     /*
@@ -29,19 +29,19 @@ pub fn day_three() {
     
     let mut part_two_answer : i64 = 0;
 
-    let mut answer = traverse_slope(&mut lines.clone(), 1, 1);
+    let mut answer = traverse_slope(&lines, 1, 1);
     println!("1-1 answer  - {:?}", answer);
     part_two_answer = answer * part_one_answer;
 
-    answer = traverse_slope(&mut lines.clone(), 5, 1);
+    answer = traverse_slope(&lines, 5, 1);
     println!("5-1 answer  - {:?}", answer);
     part_two_answer *= answer;
 
-    answer = traverse_slope(&mut lines.clone(), 7, 1);
+    answer = traverse_slope(&lines, 7, 1);
     println!("7-1 answer  - {:?}", answer);
     part_two_answer *= answer;
 
-    answer = traverse_slope(&mut lines.clone(), 1, 2);
+    answer = traverse_slope(&lines, 1, 2);
     println!("1-2 answer  - {:?}", answer);
     part_two_answer *= answer;
 
@@ -49,10 +49,9 @@ pub fn day_three() {
 
 }
 
-fn traverse_slope(path: &mut Lines, right: usize, down: usize) -> i64 {
+fn traverse_slope(path: &Vec<&str>, right: usize, down: usize) -> i64 {
     let tree = String::from('#');
 
-    let mut max_length: usize = 0;
     let mut check_byte: usize = 0;
     let mut trees_encountered: i32 = 0;
     let mut at_start: bool = true;
@@ -74,7 +73,6 @@ fn traverse_slope(path: &mut Lines, right: usize, down: usize) -> i64 {
             continue;
         }
 
-        
         // Find out our max boundary (removes the assumption that all the input lines are the same length)
         let max_length = line.len();
         check_byte += right;

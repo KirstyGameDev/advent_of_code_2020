@@ -12,6 +12,7 @@ pub fn run()
     let mut instructions = get_instruction_set();
     let mut total : i64 = 0;
     let mut current :i64 = 0;
+    let mut previous_index : usize = 0;
 
     loop 
     {
@@ -44,7 +45,9 @@ pub fn run()
         {
             // Move to the next instruction
             current += 1;
-        }    
+        }   
+        
+        previous_index = current_u;
     }
 }
 
